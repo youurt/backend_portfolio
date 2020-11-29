@@ -3,30 +3,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const blogpostRoute = require('./routes/blogposts');
-const winston = require('winston');
 
 const PORT = process.env.PORT || 3000;
-
-// logger
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-  ],
-  exceptionHandlers: [
-    new winston.transports.File({ filename: 'exceptions.log' }),
-  ],
-});
-
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(winston.format.colorize({ all: true })),
-    })
-  );
-}
 
 // routes
 app.use('/api/blogposts', blogpostRoute);
@@ -39,15 +17,15 @@ mongoose
     { useUnifiedTopology: true }
   )
   .then(() => {
-    logger.log('info', 'Connected to mongodb atlas');
+    console.log('Connected to mongodb atlas');
   })
   .catch((error) => {
-    logger.log('error', error.message);
+    console.log(error.message);
   });
 
 // start server
 app.listen(PORT, () => {
-  logger.log('info', `Server started at PORT: ${PORT}`);
+  console.log(`Server started at PORT: ${PORT}`);
 });
 
 // middlewares

@@ -1,5 +1,0 @@
-{"level":"error","message":"something wrong happened: Error"}
-{"level":"error","message":"something wrong happened: "}
-{"level":"error","message":""}
-{"level":"error","message":"error message"}
-{"level":"error","message":"The `uri` parameter to `openUri()` must be a string, got \"undefined\". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string."}
