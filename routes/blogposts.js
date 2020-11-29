@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const BlogPost = require('../models/blogposts');
+const { BlogPost, validateBlogPost } = require('../models/blogposts');
 
 // POST: CREATE A NEW BLOGPOST
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const error = await validateBlogPost(req.body);
+  if (error.message) res.status(400).send(error.message);
   blogpost = new BlogPost({
     title: req.body.title,
     date: req.body.date,
