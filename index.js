@@ -3,12 +3,30 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const blogpostRoute = require('./routes/blogposts');
+const winston = require('winston');
 
 const PORT = process.env.PORT || 3000;
 
-// middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// logger
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+  ],
+  exceptionHandlers: [
+    new winston.transports.File({ filename: 'exceptions.log' }),
+  ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.combine(winston.format.colorize({ all: true })),
+    })
+  );
+}
 
 // routes
 app.use('/api/blogposts', blogpostRoute);
@@ -21,13 +39,17 @@ mongoose
     { useUnifiedTopology: true }
   )
   .then(() => {
-    console.log('Connected to mongodb atlas');
+    logger.log('info', 'Connected to mongodb atlas');
   })
   .catch((error) => {
-    console.log(`something wrong happened: ${error}`);
+    logger.log('error', error.message);
   });
 
 // start server
 app.listen(PORT, () => {
-  console.log(`Server started at PORT: ${PORT}`);
+  logger.log('info', `Server started at PORT: ${PORT}`);
 });
+
+// middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
