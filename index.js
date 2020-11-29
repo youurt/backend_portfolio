@@ -2,8 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
+const blogpostRoute = require('./routes/blogposts');
 
 const PORT = process.env.PORT || 3000;
+
+// middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// routes
+app.use('/api/blogposts', blogpostRoute);
 
 // connect to mongodb atlas
 mongoose
