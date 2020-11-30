@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
       res.send(blogpost);
     })
     .catch((error) => {
-      res.status(500).send('blogpost was not stored in db');
+      res.status(500).send(error);
     });
 });
 
