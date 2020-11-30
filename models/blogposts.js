@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const yup = require('yup');
+const { nanoid } = require('nanoid');
 
 // BLOGPOST SCHEMA
 const BlogPostSchema = new mongoose.Schema({
@@ -23,6 +24,10 @@ const BlogPostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slugId: {
+    type: String,
+    required: false,
+  },
 });
 
 const validateBlogPost = (blogpost) => {
@@ -32,6 +37,7 @@ const validateBlogPost = (blogpost) => {
     tags: yup.array().required(),
     postCategory: yup.string().required(),
     postContent: yup.string().required(),
+    slugId: yup.string(),
   });
 
   return schema
@@ -43,6 +49,7 @@ const validateBlogPost = (blogpost) => {
       };
     });
 };
+BlogPostSchema.set('timestamps', true);
 
 exports.BlogPost = new mongoose.model('BlogPost', BlogPostSchema);
 exports.validateBlogPost = validateBlogPost;

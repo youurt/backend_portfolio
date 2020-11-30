@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { BlogPost, validateBlogPost } = require('../models/blogposts');
+const { nanoid } = require('nanoid');
 
 // POST: CREATE A NEW BLOGPOST
 router.post('/', async (req, res) => {
@@ -12,6 +13,7 @@ router.post('/', async (req, res) => {
     tags: req.body.tags,
     postCategory: req.body.postCategory,
     postContent: req.body.postContent,
+    slugId: nanoid(5),
   });
   blogpost
     .save()
