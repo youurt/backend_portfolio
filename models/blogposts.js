@@ -8,10 +8,6 @@ const BlogPostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
-    required: true,
-  },
   tags: {
     type: [String],
     required: true,
@@ -33,7 +29,6 @@ const BlogPostSchema = new mongoose.Schema({
 const validateBlogPost = (blogpost) => {
   const schema = yup.object().shape({
     title: yup.string().required(),
-    date: yup.string().required(),
     tags: yup.array().required(),
     postCategory: yup.string().required(),
     postContent: yup.string().required(),

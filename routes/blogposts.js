@@ -9,7 +9,6 @@ router.post('/', async (req, res) => {
   if (error.message) res.status(400).send(error.message);
   blogpost = new BlogPost({
     title: req.body.title,
-    date: req.body.date,
     tags: req.body.tags,
     postCategory: req.body.postCategory,
     postContent: req.body.postContent,
