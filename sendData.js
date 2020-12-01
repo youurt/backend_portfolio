@@ -1,24 +1,18 @@
 const axios = require('axios');
 const url = 'https://hidden-ridge-18950.herokuapp.com/api/blogposts';
 const data = {
-  title: 'Similar post to this! Lorem, ipsum 9.',
-  date: '11-12-2020',
-  tags: ['it', 'digital', 'react'],
+  title: 'Hello World! This is ugurtigu.com',
+  tags: ['me', 'about', 'techblog', 'hello'],
+  // "featured post" or "archive"
   postCategory: 'featured post',
+  // All elements here: "<TextBlock></TextBlock>", "<HeaderSmall></HeaderSmall>" and "<ReactEmbedGist gist='youurt/{id}' />"
   postContent: `<TextBlock>
-          But they're barely alone in this - and I can't really blame them
-          either. I have guaranteed made similar mistakes in the past, as most
-          D3.js tutorials out there don't mention accessibility, and a lot of
-          visualization libraries built upon D3.js are inaccessible by default.
+          I allways wished to have a blog where I can write about stuff. In the future time I can do that here. I will try to make posts every day eventually. this blog/webiste is made by myself with react, styled components, framer motion. For the backend I used mongo as db, express and node.js as backend. I have made this endpoint, so I can easily send my posts to the frontend via post request. This post is made with vscode and when it will be finished, I will just make an axios post request to my endpoint which then will store this string and other data in the db.
         </TextBlock>
-        <HeaderSmall>Starting point</HeaderSmall>
+        <HeaderSmall>Why?</HeaderSmall>
         <TextBlock>
-          This first tutorial will be quite broad, but we will go into more
-          detail in upcoming posts. You will need to have a basic understanding
-          of D3.js to follow along; but don't worry, an intro to D3.js series is
-          in the make as well.
-        </TextBlock>
-        <ReactEmbedGist gist='youurt/044f9aa7def8951f083b274b8f65c467' />`,
+        I am looking to build some  nice projects and I think the best way to learn from them, is to make blogposts related to the projects. 
+        </TextBlock>`,
 };
 
 axios({
